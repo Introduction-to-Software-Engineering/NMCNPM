@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class Nhap_Thong_Tin_Khach extends javax.swing.JFrame {
 
+    char[] T = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     ArrayList<Khach_Hang> list1 = new ArrayList<Khach_Hang>();
     ArrayList<Khach_Hang> list = new ArrayList<Khach_Hang>();
     Khach_Hang kh = new Khach_Hang();
@@ -197,22 +198,81 @@ public class Nhap_Thong_Tin_Khach extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void hoan_Tat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoan_Tat
+        int e = 0;
         for (int i = 0; i < list1.size(); i++) {
-            if (list1.get(i).getiD() == CMTND.getText().trim()) {
+            if (list1.get(i).getiD().equals(CMTND.getText().trim())) {
                 JOptionPane.showMessageDialog(this, "khách hàng quen !!!");
+                Ho_Ten.setText(list1.get(i).getTenKhach());
+                ComBox_ThanhP.setSelectedItem(list1.get(i).getNoiCap());
+                SDT.setText(list1.get(i).getSoDienThoai());
+                Dia_Chi_Nha.setText(list1.get(i).getDiaChiNha());
+                Dia_Chi_Mail.setText(list1.get(i).getEmail());
+
+                e = 1;
             }
         }
+        if (e == 0) {
+            if ((Ho_Ten.getText().trim().equals(""))
+                    || (CMTND.getText().trim().equals(""))
+                    || (SDT.getText().trim().equals(""))
+                    || (Dia_Chi_Nha.getText().trim().equals(""))
+                    || (Dia_Chi_Mail.getText().trim().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Fill in form!!!");
+            } else {
+                int t = 0;
+                String k = CMTND.getText().trim();
+                if (k.length() == 11) {
+                    for (int i = 0; i < k.length(); i++) {
+                        int a = 0;
+                        for (int z = 0; z < T.length; z++) {
+                            if (k.charAt(i) == T[z]) {
+                                a = 1;
+                                break;
+                            }
 
-        if ((Ho_Ten.getText().trim().equals(""))
-                || (CMTND.getText().trim().equals(""))
-                || (SDT.getText().trim().equals(""))
-                || (Dia_Chi_Nha.getText().trim().equals(""))
-                || (Dia_Chi_Mail.getText().trim().equals(""))) {
-            JOptionPane.showMessageDialog(this, "Fill in form!!!");
-        } else {
-            kh.insetKhachHang(new Khach_Hang(CMTND.getText().trim(), Ho_Ten.getText().trim(), SDT.getText().trim(), Dia_Chi_Nha.getText().trim(), Dia_Chi_Mail.getText().trim(), ComBox_ThanhP.getSelectedItem().toString()));
+                        }
+                        if (a == 0) {
+                            JOptionPane.showMessageDialog(this, "CMTND sai !!!");
+                            t = 1;
+                            break;
+
+                        }
+
+                    }
+                    if (t == 0) {
+                        String m = SDT.getText().trim();
+                        if (m.length() == 10 || m.length() == 11) {
+                            for (int i = 0; i < m.length(); i++) {
+                                int a = 0;
+                                for (int z = 0; z < T.length; z++) {
+                                    if (m.charAt(i) == T[z]) {
+                                        a = 1;
+                                        break;
+                                    }
+
+                                }
+                                if (a == 0) {
+                                    JOptionPane.showMessageDialog(this, "SDT sai !!!");
+                                    t = 1;
+                                    break;
+
+                                }
+
+                            }
+                            if (t == 0) {
+                                kh.insetKhachHang(new Khach_Hang(CMTND.getText().trim(), Ho_Ten.getText().trim(), SDT.getText().trim(), Dia_Chi_Nha.getText().trim(), Dia_Chi_Mail.getText().trim(), ComBox_ThanhP.getSelectedItem().toString()));
+
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
 
         }
+
 
     }//GEN-LAST:event_hoan_Tat
 
