@@ -265,9 +265,19 @@ public class Nhap_Thong_Tin_Khach extends javax.swing.JFrame {
                             }
 
                         }
+                        else{
+                            JOptionPane.showMessageDialog(this,"SDT sai !!!");
+                        
+                        
+                        }
 
                     }
 
+                }
+                else{
+                
+                    JOptionPane.showMessageDialog(this,"CMTND sai !!!");
+                
                 }
             }
 
